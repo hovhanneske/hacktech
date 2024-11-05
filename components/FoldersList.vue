@@ -24,12 +24,13 @@ import {FolderOpenOutlined, FileDoneOutlined} from "@ant-design/icons-vue";
 import {defineProps} from 'vue';
 import type {IFolder} from "~/types/types";
 
-const props = defineProps<{
+interface IProps {
   tree: {
     files: string[];
     folders: Record<string, any>;
-  };
-}>();
+  }
+}
+const props = defineProps<IProps>();
 
 const emit = defineEmits(["select-folder"]);
 

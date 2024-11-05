@@ -5,7 +5,9 @@
     <div class="container">
       <a-button @click="showModal = true" type="primary">Add Folder</a-button>
 
-      <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm"/>
+     <main>
+       <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm"/>
+     </main>
 
       <FoldersList :tree="selectedFolder" @select-folder="selectFolder"/>
     </div>
@@ -61,5 +63,9 @@ function addPath(path: string, structure = rootStructure) {
 <style scoped lang="scss">
 .container {
   padding: 20px 50px;
+
+  main {
+    margin-top: 20px;
+  }
 }
 </style>

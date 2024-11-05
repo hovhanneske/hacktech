@@ -10,12 +10,11 @@
 <script setup lang="ts">
 import {defineProps, ref, watch} from 'vue'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
-})
+interface IProps {
+  modelValue: boolean;
+}
+
+const props = defineProps<IProps>();
 
 const emit = defineEmits(["update:modelValue", "confirm"]);
 
@@ -30,23 +29,22 @@ const close = () => {
 }
 
 const confirm = () => {
-  console.log(inputText.value)
   const errorMessage = validateInput(inputText.value);
   if (errorMessage) {
     showErrorMessage(errorMessage);
     return;
   }
 
-  emit('confirm', inputText.value)
-  close()
+  emit('confirm', inputText.value);
+  close();
 }
 
 const validateInput = (value: string): null | string => {
-  if (!value.length) return "Field is required"
+  if (!value.length) return "Field is required";
   if (value.length < 2) return "Length must be at last 2 characters";
 
   const nesting = value.split("/");
-  if (nesting.length > 4) return "Maximum nesting level is 3"
+  if (nesting.length > 4) return "Maximum nesting level is 3";
 
   return null;
 }
