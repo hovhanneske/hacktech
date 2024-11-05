@@ -12,6 +12,13 @@
   </div>
 </template>
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Add folders and Files',
+  ogTitle: 'Add folders and Files',
+  description: 'Create new folders and files.',
+  ogDescription: 'Create new folders and files.'
+})
+
 import {ref} from 'vue';
 import type {IFolder} from "~/types/types";
 
