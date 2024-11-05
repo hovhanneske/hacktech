@@ -42,28 +42,36 @@ const selectFolder = (folder: IFolder) => {
 
 <style scoped>
 .folder-tree {
+  margin: 50px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .item {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 5px;
 }
 
 .folder {
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .icon-folder::before {
   content: "📁";
+  font-size: 50px;
 }
 
 .icon-file::before {
   content: "📄";
+  font-size: 50px;
 }
 
 /* Styling for nested folders to add indentation */
