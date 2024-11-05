@@ -7,8 +7,8 @@
 
     <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm">
       <template #content>
-        <h2>My Modal Content</h2>
-        <p>Please enter some text and confirm:</p>
+        <h2>Add new Folder/File</h2>
+        <p>Please enter some text and confirm</p>
       </template>
     </AddModal>
 
@@ -18,11 +18,6 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import type {IFolder} from "~/types/types";
-
-onMounted(() => {
-  const savedFolders = JSON.parse(localStorage.getItem("folders") || "");
-  if (savedFolders) rootStructure.value = savedFolders;
-})
 
 const rootStructure = ref<IFolder>({files: [], folders: {}});
 
