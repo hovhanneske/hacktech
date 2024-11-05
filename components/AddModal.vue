@@ -1,15 +1,10 @@
 <template>
-  <div v-if="isOpen" class="modal-overlay" @click="close">
-    <div class="modal-content" @click.stop>
-      <slot name="content"/>
-      <input @keydown.enter="confirm" v-model="inputText" type="text" placeholder="Enter text" class="modal-input"/>
-      <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
-      <div class="modal-actions">
-        <AppButton @click="confirm">Confirm</AppButton>
-        <AppButton button-type="danger" @click="close">Close</AppButton>
-      </div>
-    </div>
-  </div>
+  <a-modal v-model:open="isOpen" title="Add Folder" @cancel="close" @ok="confirm">
+    <a-space direction="vertical" style="width: 100%">
+      <a-input @keydown.enter="confirm" v-model:value="inputText" placeholder="Enter text"/>
+      <a-alert v-if="errorMessage" :message="errorMessage" type="error"/>
+    </a-space>
+  </a-modal>
 </template>
 
 <script setup lang="ts">
@@ -30,10 +25,12 @@ const errorMessage = ref<string | null>(null);
 const close = () => {
   isOpen.value = false;
   inputText.value = "";
+  errorMessage.value = "";
   emit('update:modelValue', false)
 }
 
 const confirm = () => {
+  console.log(inputText.value)
   const errorMessage = validateInput(inputText.value);
   if (errorMessage) {
     showErrorMessage(errorMessage);
@@ -67,42 +64,4 @@ watch(
 </script>
 
 <style scoped lang="scss">
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
-  width: 300px;
-
-  .modal-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-
-  .error-message {
-    font-size: 14px;
-    color: #f44336;
-  }
-}
 </style>

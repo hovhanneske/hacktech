@@ -1,28 +1,26 @@
 <template>
-  <div class="folder-tree">
+  <Flex gap="middle">
     <div v-for="file in tree.files" :key="file" class="item">
-      <i class="icon-file"></i>
-      <span>{{ file }}</span>
+      <FileDoneOutlined class="icon"/>
+      <span class="item-name">{{ file }}</span>
     </div>
 
-    <!-- Render folders recursively -->
     <div @click="selectFolder(folder)"
          v-for="(folder, folderName) in tree.folders"
          :key="folderName"
          class="item">
       <div class="folder">
-        <i class="icon-folder"></i>
-        <span>{{ folderName }}</span>
+        <FolderOpenOutlined class="icon"/>
+        <span class="item-name">{{ folderName }}</span>
       </div>
-
-<!--      <div class="nested">-->
-<!--        <FoldersList :tree="folder"/>-->
-<!--      </div>-->
     </div>
-  </div>
+  </Flex>
 </template>
 
 <script setup lang="ts">
+import {Flex} from "ant-design-vue";
+import {FolderOpenOutlined, FileDoneOutlined} from "@ant-design/icons-vue";
+
 import {defineProps} from 'vue';
 import type {IFolder} from "~/types/types";
 
@@ -40,16 +38,7 @@ const selectFolder = (folder: IFolder) => {
 }
 </script>
 
-<style scoped>
-.folder-tree {
-  margin: 50px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
+<style scoped lang="scss">
 .item {
   display: flex;
   align-items: center;
@@ -64,22 +53,11 @@ const selectFolder = (folder: IFolder) => {
   align-items: center;
 }
 
-.icon-folder::before {
-  content: "📁";
+.icon {
   font-size: 50px;
 }
 
-.icon-file::before {
-  content: "📄";
-  font-size: 50px;
-}
-
-/* Styling for nested folders to add indentation */
-.nested {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  margin-left: 20px;
-  align-items: flex-start;
+.item-name {
+  font-size: 24px;
 }
 </style>

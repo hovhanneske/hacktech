@@ -1,21 +1,24 @@
 <template>
   <div>
     <NuxtRouteAnnouncer/>
-    <AppButton @click="showModal = true">
-      Add Folder
-    </AppButton>
 
-    <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm">
-      <template #content>
-        <h2>Add new Folder/File</h2>
-        <p>Please enter some text and confirm</p>
-      </template>
-    </AddModal>
+    <div class="container">
+      <a-button @click="showModal = true" type="primary">Add Folder</a-button>
 
-    <FoldersList :tree="selectedFolder" @select-folder="selectFolder"/>
+      <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm"/>
+
+      <FoldersList :tree="selectedFolder" @select-folder="selectFolder"/>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Add folders and Files',
+  ogTitle: 'Add folders and Files',
+  description: 'Create new folders and files.',
+  ogDescription: 'Create new folders and files.'
+})
+
 import {ref} from 'vue';
 import type {IFolder} from "~/types/types";
 
@@ -31,7 +34,6 @@ const selectFolder = (folder: IFolder) => {
 const handleConfirm = (value: string) => {
   addPath(value, rootStructure);
   selectFolder(rootStructure.value);
-  localStorage.setItem("folders", JSON.stringify(rootStructure.value));
 }
 
 const isFile = (value: string) => {
@@ -55,3 +57,9 @@ function addPath(path: string, structure = rootStructure) {
 }
 
 </script>
+
+<style scoped lang="scss">
+.container {
+  padding: 20px 50px;
+}
+</style>
