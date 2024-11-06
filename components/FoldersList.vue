@@ -40,8 +40,8 @@ const props = defineProps<IProps>();
 const emit = defineEmits(["select-folder"]);
 
 const folderHasItems = computed(() => {
-  const hasFolders = !!props.tree.folders.length;
-  const hasFiles = !!Object.keys(props.tree.folders).length;
+  const hasFolders = !!Object.keys(props.tree.folders).length;
+  const hasFiles = !!props.tree.files.length;
   return hasFolders || hasFiles;
 })
 

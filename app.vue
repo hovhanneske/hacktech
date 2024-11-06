@@ -14,15 +14,16 @@
   </div>
 </template>
 <script setup lang="ts">
+import {ref} from 'vue';
+import type {IFolder} from "~/types/types";
+import {getSavedFolders} from "~/helpers/storage";
+
 useSeoMeta({
   title: 'Add folders and Files',
   ogTitle: 'Add folders and Files',
   description: 'Create new folders and files.',
   ogDescription: 'Create new folders and files.'
 })
-
-import {ref} from 'vue';
-import type {IFolder} from "~/types/types";
 
 const rootStructure = ref<IFolder>({files: [], folders: {}});
 
@@ -56,7 +57,17 @@ function addPath(path: string, structure = rootStructure) {
       current = current.folders[part];
     }
   });
+
+  localStorage.setItem("folders-structure", JSON.stringify(rootStructure.value));
 }
+
+onMounted(() => {
+  const data = getSavedFolders();
+  if(data) {
+    rootStructure.value.folders = data.folders;
+    rootStructure.value.files = data.files;
+  }
+})
 
 </script>
 
