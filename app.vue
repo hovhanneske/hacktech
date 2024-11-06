@@ -9,7 +9,7 @@
        <AddModal :modelValue="showModal" @update:modelValue="showModal = $event" @confirm="handleConfirm"/>
      </main>
 
-      <FoldersList :tree="selectedFolder" @select-folder="selectFolder"/>
+      <FoldersList :tree="selectedFolder" @select-folder="selectFolder" :folder-has-items="folderHasItems"/>
     </div>
   </div>
 </template>
@@ -29,6 +29,12 @@ const rootStructure = ref<IFolder>({files: [], folders: {}});
 const showModal = ref(false);
 
 const selectedFolder = ref(rootStructure.value);
+
+const folderHasItems = computed(() => {
+  const hasFolders = !!selectedFolder.value.folders.length;
+  const hasFiles = !!Object.keys(selectedFolder.value.folders).length;
+  return hasFolders || hasFiles;
+})
 
 const selectFolder = (folder: IFolder) => {
   selectedFolder.value = folder;

@@ -1,19 +1,26 @@
 <template>
   <Flex gap="middle">
-    <div v-for="file in tree.files" :key="file" class="item">
-      <FileDoneOutlined class="icon"/>
-      <span class="item-name">{{ file }}</span>
-    </div>
-
-    <div @click="selectFolder(folder)"
-         v-for="(folder, folderName) in tree.folders"
-         :key="folderName"
-         class="item">
-      <div class="folder">
-        <FolderOpenOutlined class="icon"/>
-        <span class="item-name">{{ folderName }}</span>
+    <template v-if="folderHasItems">
+      <div v-for="file in tree.files" :key="file" class="item">
+        <FileDoneOutlined class="icon"/>
+        <span class="item-name">{{ file }}</span>
       </div>
-    </div>
+
+      <div @click="selectFolder(folder)"
+           v-for="(folder, folderName) in tree.folders"
+           :key="folderName"
+           class="item">
+        <div class="folder">
+          <FolderOpenOutlined class="icon"/>
+          <span class="item-name">{{ folderName }}</span>
+        </div>
+      </div>
+    </template>
+
+    <span v-else>
+      Folder is empty
+    </span>
+
   </Flex>
 </template>
 
@@ -21,15 +28,16 @@
 import {Flex} from "ant-design-vue";
 import {FolderOpenOutlined, FileDoneOutlined} from "@ant-design/icons-vue";
 
-import {defineProps} from 'vue';
 import type {IFolder} from "~/types/types";
 
 interface IProps {
   tree: {
     files: string[];
     folders: Record<string, any>;
-  }
+  },
+  folderHasItems: boolean;
 }
+
 const props = defineProps<IProps>();
 
 const emit = defineEmits(["select-folder"]);
