@@ -1,75 +1,44 @@
-# Nuxt Minimal Starter
+# CREATE FOLDERS APP
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Information
 
-## Setup
+### Author
 
-Make sure to install dependencies:
+```
+Hovhannes Keshishyan
+```
 
-```bash
-# npm
+
+## Project setup
+
+```
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+### Compiles and hot-reloads for development
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+```
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+### Compiles and minifies for production
 
-Build the application for production:
-
-```bash
-# npm
+```
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+### Preview
 
-```bash
-# npm
+```
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Technologies
+
+```
+Nuxt3, Vue, TypeScript, Ant Design, SCSS
+```
+
+### Live Demo
+
+[https://create-folders.vercel.app/](https://create-folders.vercel.app/).
