@@ -17,15 +17,13 @@
       </div>
     </template>
 
-    <span v-else>
-      Folder is empty
-    </span>
+    <Alert v-else message="Folder is empty" type="warning" />
 
   </Flex>
 </template>
 
 <script setup lang="ts">
-import {Flex} from "ant-design-vue";
+import {Flex, Alert} from "ant-design-vue";
 import {FolderOpenOutlined, FileDoneOutlined} from "@ant-design/icons-vue";
 
 import type {IFolder} from "~/types/types";
@@ -34,13 +32,18 @@ interface IProps {
   tree: {
     files: string[];
     folders: Record<string, any>;
-  },
-  folderHasItems: boolean;
+  }
 }
 
 const props = defineProps<IProps>();
 
 const emit = defineEmits(["select-folder"]);
+
+const folderHasItems = computed(() => {
+  const hasFolders = !!props.tree.folders.length;
+  const hasFiles = !!Object.keys(props.tree.folders).length;
+  return hasFolders || hasFiles;
+})
 
 const selectFolder = (folder: IFolder) => {
   emit("select-folder", folder);
